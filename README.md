@@ -17,32 +17,44 @@
 1. Inno Setup 실행 후 `File` → `New` → `Script Wizard`  
    ![image](https://github.com/user-attachments/assets/88ed5f1e-6e0e-48eb-8755-7fe126bcc0a8)
    ![image](https://github.com/user-attachments/assets/8d558af3-66ee-404f-afa2-1bc8844f5b06)
+   옵션 설명:
+Create a new empty script file
 
-2. 프로젝트 정보를 입력  
+프로젝트 정보나 설정 없이 완전히 빈 상태로 스크립트를 작성할 때 사용.
+스크립트를 처음부터 직접 작성해야 하므로 기본 설정이 없습니다.
+Create a new script file using the Script Wizard
+
+Script Wizard를 통해 단계별로 프로젝트 정보를 입력하고 스크립트를 자동 생성.
+기본적으로 이 옵션을 선택하는 것이 간편합니다.
+Open an existing script file
+
+이미 작성된 .iss 파일(예: AutoBridgeInstaller.iss)을 열어서 수정하거나 다시 컴파일.
+
+3. 프로젝트 정보를 입력  
    ![image](https://github.com/user-attachments/assets/b35b4bd2-ad45-47e1-a5a4-9fb38b9e7e11)
 
-3. 프로그램 실행 파일 및 관련 파일 추가 (`*.exe`, `*.dll` 등)  
+4. 프로그램 실행 파일 및 관련 파일 추가 (`*.exe`, `*.dll` 등)  
    ![image](https://github.com/user-attachments/assets/6e2898c7-5ad2-493d-80d7-2491ae864b2a)
 
-4. `Output` 디렉토리 설정 후 `Compile` 실행 → 설치 파일 생성!  
-   - 출력되는 결과물을 어떤 파일 형식으로 저장할 것인지에 관한 것이라는 데, 모르겠음  
+5. `Output` 디렉토리 설정 후 `Compile` 실행 → 설치 파일 생성!  
+   - 출력되는 결과물을 어떤 파일 형식으로 저장할 것인지에 관한 것이라는 데, 솔직히 대체 저 OUTPUT이라는 게 뭔지 모르겠습니다.
    ![image](https://github.com/user-attachments/assets/77d32d14-2d49-4018-894d-3404461b743f)  
    ![image](https://github.com/user-attachments/assets/7db4ebc6-aac8-4363-8800-c39aea409a31)
 
-5. 설치 중 표시될 문서 (선택사항)  
+6. 설치 중 표시될 문서 (선택사항)  
    - **License file**: 설치 중 사용자에게 표시될 **라이선스 파일(TXT, RTF 등)**을 지정합니다.  
      예: "사용자 동의" 창에 표시될 내용.  
    - **Information file shown before installation**: 설치 전에 표시될 정보 파일(예: README 파일).  
    - **Information file shown after installation**: 설치 완료 후 사용자에게 표시될 정보 파일(예: 사용 설명서).  
    ![image](https://github.com/user-attachments/assets/6226ae9a-2961-42b1-8feb-9e876f532579)
 
-6. 모든 사용자 계정에서 프로그램을 사용할 수 있도록 설치  
+7. 모든 사용자 계정에서 프로그램을 사용할 수 있도록 설치  
    ![image](https://github.com/user-attachments/assets/1e2f08a8-8014-441b-ae79-29ef3653fee9)
 
-7. 레지스트리 특정하지 맙시다. Revit은 버젼이 다양하기 때문입니당.  
+8. 레지스트리 특정하지 맙시다. Revit은 버젼이 다양하기 때문입니다. 
    ![image](https://github.com/user-attachments/assets/19bc5a8b-9462-4d57-99b8-3417ccd2efbe)
 
-8. 컴파일 셋팅  
+9. 컴파일 셋팅  
    - **Custom compiler output folder**: 생성된 설치 파일(EXE)을 저장할 폴더를 지정합니다. (기본은 프로젝트 폴더)  
    - **Compiler output base file name**: 설치 파일의 기본 이름을 설정합니다.  
      예: `mysetup` → 결과 파일은 `mysetup.exe`.  
@@ -50,7 +62,7 @@
    - **Setup password**: 설치 파일에 암호를 설정하여, 설치 시 암호를 입력해야 진행되도록 설정.  
    ![image](https://github.com/user-attachments/assets/ebd4db9c-1b1e-465d-904d-bd15667deb71)
 
-9. 스크립트를 재사용 할 건가요?  
+10. 스크립트를 재사용 할 건가요?  YES!
    - **Inno Setup Preprocessor란?**  
      스크립트를 단순화하고 재사용 가능한 구조로 만들기 위해 사용하는 기능입니다.  
      `#define` 지시문을 사용하여 변수 및 상수를 정의하고, 나중에 스크립트에서 쉽게 변경할 수 있도록 돕습니다.  
