@@ -30,7 +30,7 @@
 ![image](https://github.com/user-attachments/assets/77d32d14-2d49-4018-894d-3404461b743f)
 ![image](https://github.com/user-attachments/assets/7db4ebc6-aac8-4363-8800-c39aea409a31)
 
-5. 설치 중 표시될 문서
+5. 설치 중 표시될 문서 (선택사항)
 - License file:
 설치 중 사용자에게 표시될 **라이선스 파일(TXT, RTF 등)**을 지정합니다.
 예: "사용자 동의" 창에 표시될 내용.
@@ -39,6 +39,12 @@
 - Information file shown after installation:
 설치 완료 후 사용자에게 표시될 정보 파일(예: 사용 설명서).
 ![image](https://github.com/user-attachments/assets/6226ae9a-2961-42b1-8feb-9e876f532579)
+
+6. 모든 사용자 계정에서 프로그램을 사용할 수 있도록 설치
+![image](https://github.com/user-attachments/assets/1e2f08a8-8014-441b-ae79-29ef3653fee9)
+
+7. 레지스트리 특정하지 맙시다. Revit은 버젼이 다양하기 때문입니당.
+![image](https://github.com/user-attachments/assets/19bc5a8b-9462-4d57-99b8-3417ccd2efbe)
 
 ---
 
