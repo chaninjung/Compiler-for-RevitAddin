@@ -16,9 +16,17 @@
 ## 🔹 2. 기본적인 Inno Setup 설정
 ### ✅ `Script Wizard`로 설치 파일 생성 (간단한 방법)
 1. Inno Setup 실행 후 `File` → `New` → `Script Wizard`
-2. 프로젝트 정보를 입력
-3. 프로그램 실행 파일 및 관련 파일 추가 (`*.exe`, `*.dll` 등)
-4. `Output` 디렉토리 설정 후 `Compile` 실행 → 설치 파일 생성!
+![image](https://github.com/user-attachments/assets/88ed5f1e-6e0e-48eb-8755-7fe126bcc0a8)
+![image](https://github.com/user-attachments/assets/8d558af3-66ee-404f-afa2-1bc8844f5b06)
+![image](https://github.com/user-attachments/assets/b35b4bd2-ad45-47e1-a5a4-9fb38b9e7e11)
+
+
+
+3. 프로젝트 정보를 입력
+4. 프로그램 실행 파일 및 관련 파일 추가 (`*.exe`, `*.dll` 등)
+![image](https://github.com/user-attachments/assets/247fa369-28b0-4548-9b8a-a9e3636e5701)
+
+6. `Output` 디렉토리 설정 후 `Compile` 실행 → 설치 파일 생성!
 
 ---
 
