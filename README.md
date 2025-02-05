@@ -94,7 +94,7 @@
 
 ## 🔹 3. 직접 Inno Setup 스크립트 작성하기
 ### ✅ 기본 `setup.iss` 예제
-아래 코드를 `setup.iss` 파일로 저장한 후 `Compile`하면 EXE 설치 파일을 생성할 수 있습니다.
+아래 코드를 `setup.iss` 파일로 저장 (저는 아까 AutoBridgeDesign 폴더에 iss 스크립트를 저장했습니다.) 한 후 `Compile`하면 EXE 설치 파일을 생성할 수 있습니다.
 
 ```ini
 [Setup]
