@@ -109,7 +109,7 @@ Name: "{group}\내 프로그램 실행"; Filename: "{app}\내프로그램.exe"
 Filename: "{app}\내프로그램.exe"; Description: "프로그램 실행"; Flags: nowait postinstall skipifsilent
 ```
 
-### ✅ 변수 활용
+### ✅ 변수를 활용하지 않는다면면
 우리는 모든 Revit ver. 그리고 수십 개의 dll을 컴파일 해야합니다. [Files] 아래에 그 모든 것을 넣는다면 아래와 같이 가독성이 떨어질 것입니다. (심지어 2024버젼만 컴파일하는 예제입니다.)
 
 ```ini
@@ -256,6 +256,61 @@ Source: "ZstdSharp.dll"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2024"; Fl
 
 // ProgramData 경로 (공용 Addins 경로)
 Source: "System.Runtime.dll"; DestDir: "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Facades"; Flags: ignoreversion
+```
+
+### ✅ 변수 활용
+우리는 모든 Revit ver. 그리고 수십 개의 dll을 컴파일 해야합니다. [Files] 아래에 그 모든 것을 넣는다면 아래와 같이 가독성이 떨어질 것입니다. (심지어 2024버젼만 컴파일하는 예제입니다.)
+
+```ini
+[Setup]
+AppName=AutoBridge Add-In Installer
+AppVersion=1.0
+DefaultDirName={pf}\AutoBridgeInstaller
+OutputBaseFilename=AutoBridgeInstaller
+
+[Files]
+// 파일 리스트를 사용하여 ProgramData & AppData에 자동 복사
+Source: "filelist_programdata.txt"; Flags: dontcopy
+Source: "filelist_appdata.txt"; Flags: dontcopy
+
+[Code]
+// 지원하는 Revit 버전 목록
+const
+  RevitVersions: array[0..8] of string = (
+    '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'
+  );
+
+// 파일 리스트를 읽고 해당 Revit Addins 폴더에 복사
+procedure CopyFilesFromList(ListFile, DestDir: string);
+var
+  FileList: TStringList;
+  i: Integer;
+begin
+  FileList := TStringList.Create;
+  try
+    FileList.LoadFromFile(ExpandConstant('{tmp}\' + ListFile));
+    for i := 0 to FileList.Count - 1 do
+      if FileExists(FileList[i]) then
+        FileCopy(FileList[i], ExpandConstant(DestDir) + '\' + ExtractFileName(FileList[i]), False);
+  finally
+    FileList.Free;
+  end;
+end;
+
+// 설치 과정에서 자동 실행
+procedure CurStepChanged(CurStep: TSetupStep);
+var
+  i: Integer;
+begin
+  if CurStep = ssInstall then
+  begin
+    for i := 0 to GetArrayLength(RevitVersions) - 1 do
+    begin
+      CopyFilesFromList('filelist_programdata.txt', '{commonappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
+      CopyFilesFromList('filelist_appdata.txt', '{userappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
+    end;
+  end;
+end;
 ```
 
 ---
