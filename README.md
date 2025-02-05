@@ -7,7 +7,8 @@
 ## 🔹 1. Inno Setup 설치하기
 ### 🔹 설치 방법
 1. [Inno Setup 공식 사이트](https://jrsoftware.org/isinfo.php)에서 다운로드  
-2. 설치 후 `Inno Setup Compiler` 실행  
+2. 설치 후 `Inno Setup Compiler` 실행  ![image](https://github.com/user-attachments/assets/790247ca-2c1c-45c9-8649-fe6f54c6f280)
+
 
 ---
 
