@@ -72,6 +72,10 @@
    - 일반적으로 활성화(Yes)로 설정하는 것이 좋습니다. 😊  
    ![image](https://github.com/user-attachments/assets/c044f280-f2d2-4db2-94b3-41d4deb1d756)
 
+10. 엑세스가 거부된다면
+![image](https://github.com/user-attachments/assets/16116e78-2f2a-413c-a0a5-463e08162a77)
+
+
 ---
 
 ## 🔹 3. 직접 Inno Setup 스크립트 작성하기
