@@ -88,7 +88,7 @@
 ### ✅ 기본 setup.iss 예제
 아래 코드를 setup.iss 파일로 저장한 후 Compile하면 EXE 설치 파일을 생성할 수 있습니다.
 
-ini
+```ini
 [Setup]
 AppName=내 프로그램
 AppVersion=1.0
@@ -107,12 +107,12 @@ Name: "{group}\내 프로그램 실행"; Filename: "{app}\내프로그램.exe"
 
 [Run]
 Filename: "{app}\내프로그램.exe"; Description: "프로그램 실행"; Flags: nowait postinstall skipifsilent
-
+```
 
 ### ✅ 변수 활용
 우리는 모든 Revit ver. 그리고 수십 개의 dll을 컴파일 해야합니다. [Files] 아래에 그 모든 것을 넣는다면 아래와 같이 가독성이 떨어질 것입니다. (심지어 2024버젼만 컴파일하는 예제입니다.)
 
-ini
+```ini
 [Files]
 // ProgramData 경로 (공용 Addins 경로)
 
@@ -256,33 +256,32 @@ Source: "ZstdSharp.dll"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2024"; Fl
 
 // ProgramData 경로 (공용 Addins 경로)
 Source: "System.Runtime.dll"; DestDir: "C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Facades"; Flags: ignoreversion
+```
 
 ---
 ## 🔹 4. 컴파일해야 하는 파일의 기준
-📌 확인해야 할 사항
-프로젝트의 빌드 출력 (Build Output)
 
-Visual Studio에서 빌드 후, bin\Release 또는 bin\Debug 폴더에 생성된 .dll 및 .exe 파일들이 대상입니다.
-특히 AutoBridgeDesign.dll 같은 핵심 라이브러리 파일이 포함되는지 확인해야 합니다.
-프로젝트에서 참조하는 외부 라이브러리 (Dependencies)
+### 📌 확인해야 할 사항
+- **프로젝트의 빌드 출력 (Build Output)**
+  - Visual Studio에서 `bin\Release` 또는 `bin\Debug` 폴더 확인.
+  - 핵심 라이브러리 (`AutoBridgeDesign.dll` 등) 포함 여부 체크.
 
-프로젝트가 사용하는 NuGet 패키지 또는 추가한 외부 DLL도 함께 배포해야 합니다.
-예: DevExpress, EPPlus, Newtonsoft.Json, RevitAPI.dll 등
-Revit에서 Add-In으로 동작하는 핵심 파일
+- **프로젝트 참조 외부 라이브러리**
+  - NuGet 패키지 또는 추가한 외부 DLL (`DevExpress`, `EPPlus`, `Newtonsoft.Json`, `RevitAPI.dll` 등).
 
-.addin 파일: Revit에 Add-In을 등록하는 중요한 파일
-DBM.addin 같은 파일이 있는지 확인
-.dll 파일: Revit API를 활용하는 코드들이 들어있는 라이브러리
-설치 대상 폴더 (Revit Addins)
+- **Revit Add-In 파일**
+  - `.addin` 파일: Add-In 등록 필수.
+  - `.dll` 파일: Revit API 활용 라이브러리 포함.
 
-{commonappdata}\Autodesk\Revit\Addins\2024 같은 폴더에 복사해야 하는 파일들
-2018~2026 버전 지원하려면 {commonappdata}\Autodesk\Revit\Addins\XXXX 구조로 적용해야 함.
-📌 VS에서 확인할 방법
-Visual Studio 열기
-솔루션 탐색기 → "bin\Release" or "bin\Debug" 폴더 열기
-출력된 .dll, .exe, .addin 파일 확인
-빌드한 파일이 포함되어 있는지 체크하고 목록 정리
-✔ 이후 filelist_programdata.txt & filelist_appdata.txt에 정리해서 Inno Setup에서 처리하면 됩니다. 🔥
+- **설치 대상 폴더**
+  - `{commonappdata}\Autodesk\Revit\Addins\2024` 폴더 사용.
+  - `2018~2026` 버전 지원하려면 `{commonappdata}\Autodesk\Revit\Addins\XXXX` 구조 적용.
+
+### 📌 VS에서 확인할 방법
+1. Visual Studio 열기
+2. 솔루션 탐색기 → `bin\Release` 또는 `bin\Debug` 폴더 열기
+3. `.dll`, `.exe`, `.addin` 파일 확인 후 정리
+4. `filelist_programdata.txt` & `filelist_appdata.txt` 파일 생성 후 Inno Setup에서 활용 🔥
 ---
 
 ## 🔹 5. 설치 중 오류 해결
