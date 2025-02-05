@@ -259,7 +259,7 @@ Source: "System.Runtime.dll"; DestDir: "C:\Program Files (x86)\Reference Assembl
 ```
 
 ### ✅ 변수 활용
-우리는 모든 Revit ver. 그리고 수십 개의 dll을 컴파일 해야합니다. [Files] 아래에 그 모든 것을 넣는다면 아래와 같이 가독성이 떨어질 것입니다. (심지어 2024버젼만 컴파일하는 예제입니다.)
+모든 파일 이름을 .txt 파일에 기록한 뒤, 스크립트에서 읽어 처리해봅시다.
 
 ```ini
 [Setup]
