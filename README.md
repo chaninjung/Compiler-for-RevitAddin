@@ -269,29 +269,49 @@ DefaultDirName={pf}\AutoBridgeInstaller
 OutputBaseFilename=AutoBridgeInstaller
 
 [Files]
-// 파일 리스트를 사용하여 ProgramData & AppData에 자동 복사
-Source: "filelist_programdata.txt"; Flags: dontcopy
-Source: "filelist_appdata.txt"; Flags: dontcopy
+// ProgramData & AppData의 파일 리스트를 임시 폴더에 복사
+Source: "filelist_programdata.txt"; DestDir: "{tmp}"; Flags: dontcopy
+Source: "filelist_appdata.txt"; DestDir: "{tmp}"; Flags: dontcopy
 
 [Code]
 // 지원하는 Revit 버전 목록
-const
-  RevitVersions: array[0..8] of string = (
-    '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'
-  );
+var
+  RevitVersions: array[0..8] of string;
+
+procedure InitializeRevitVersions;
+begin
+  RevitVersions[0] := '2018';
+  RevitVersions[1] := '2019';
+  RevitVersions[2] := '2020';
+  RevitVersions[3] := '2021';
+  RevitVersions[4] := '2022';
+  RevitVersions[5] := '2023';
+  RevitVersions[6] := '2024';
+  RevitVersions[7] := '2025';
+  RevitVersions[8] := '2026';
+end;
 
 // 파일 리스트를 읽고 해당 Revit Addins 폴더에 복사
 procedure CopyFilesFromList(ListFile, DestDir: string);
 var
   FileList: TStringList;
+  FilePath, DestPath: string;
   i: Integer;
 begin
   FileList := TStringList.Create;
   try
+    ExtractTemporaryFile(ListFile);  // Ensure the file exists in {tmp}
     FileList.LoadFromFile(ExpandConstant('{tmp}\' + ListFile));
+    
     for i := 0 to FileList.Count - 1 do
-      if FileExists(FileList[i]) then
-        FileCopy(FileList[i], ExpandConstant(DestDir) + '\' + ExtractFileName(FileList[i]), False);
+    begin
+      FilePath := ExpandConstant('{tmp}\' + FileList[i]); 
+      DestPath := ExpandConstant(DestDir) + '\' + ExtractFileName(FileList[i]);
+
+      if FileExists(FilePath) then
+        if not FileCopy(FilePath, DestPath, False) then
+          MsgBox('파일 복사 실패: ' + FilePath, mbError, MB_OK);
+    end;
   finally
     FileList.Free;
   end;
@@ -304,13 +324,15 @@ var
 begin
   if CurStep = ssInstall then
   begin
-    for i := 0 to GetArrayLength(RevitVersions) - 1 do
+    InitializeRevitVersions; // RevitVersions 배열 초기화
+    for i := 0 to High(RevitVersions) do
     begin
       CopyFilesFromList('filelist_programdata.txt', '{commonappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
       CopyFilesFromList('filelist_appdata.txt', '{userappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
     end;
   end;
 end;
+
 ```
 
 ---
