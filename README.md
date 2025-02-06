@@ -267,11 +267,14 @@ AppName=AutoBridge Add-In Installer
 AppVersion=1.0
 DefaultDirName={pf}\AutoBridgeInstaller
 OutputBaseFilename=AutoBridgeInstaller
+SetupIconFile=C:\AutoBridgeDesign\bridge.ico  ; 아이콘 파일 경로는 절대 경로로 해주면 좋고, png파일을 ico로 변경할 필요가 있습니다.
 
 [Files]
 // ProgramData & AppData의 파일 리스트를 임시 폴더에 복사
 Source: "filelist_programdata.txt"; DestDir: "{tmp}"; Flags: dontcopy
 Source: "filelist_appdata.txt"; DestDir: "{tmp}"; Flags: dontcopy
+// System.Runtime.dll 추가
+Source: "System.Runtime.dll"; DestDir: "{tmp}"; Flags: dontcopy
 
 [Code]
 // 지원하는 Revit 버전 목록
@@ -317,6 +320,19 @@ begin
   end;
 end;
 
+// System.Runtime.dll 파일 복사 (버전에 관계없이 특정 경로로 배포)
+procedure CopySystemRuntime(DestDir: string);
+var
+  FilePath, DestPath: string;
+begin
+  FilePath := ExpandConstant('{tmp}\System.Runtime.dll');
+  DestPath := ExpandConstant(DestDir + '\System.Runtime.dll');
+
+  if FileExists(FilePath) then
+    if not FileCopy(FilePath, DestPath, False) then
+      MsgBox('System.Runtime.dll 복사 실패: ' + FilePath, mbError, MB_OK);
+end;
+
 // 설치 과정에서 자동 실행
 procedure CurStepChanged(CurStep: TSetupStep);
 var
@@ -330,9 +346,10 @@ begin
       CopyFilesFromList('filelist_programdata.txt', '{commonappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
       CopyFilesFromList('filelist_appdata.txt', '{userappdata}\Autodesk\Revit\Addins\' + RevitVersions[i]);
     end;
+    // System.Runtime.dll을 특정 경로에 복사
+    CopySystemRuntime('C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Facades');
   end;
 end;
-
 ```
 
 ---
