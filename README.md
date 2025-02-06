@@ -413,7 +413,7 @@ DefaultDirName={commonpf}\내프로그램
 ![image](https://github.com/user-attachments/assets/557f47a2-b999-47e7-9f4e-d25c0c01dd7e)
 2) C:\ProgramData\Autodesk\Revit\Addins 경로에 설치 파일 생성
 ![image](https://github.com/user-attachments/assets/d1b987b6-e45c-475d-955f-10c70b4adb07)
-3) C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Facades 경로에 Runtime 파일 생성
+3) C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\Facades 경로에 Runtime 파일 생성 (.NET 배포는 Runtime 배포가 필수)
 ![image](https://github.com/user-attachments/assets/04c5b387-3d27-4372-bcc3-bb8c108032a4)
 
 
