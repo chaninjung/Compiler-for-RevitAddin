@@ -7,7 +7,7 @@ SetupIconFile=C:\AutoBridgeDesign\bridge.ico
 
 
 [Files]
-// ProgramData 경로 (공용 Addins 경로) : Installing in this path ensures that the software is automatically applied to all user accounts. So, I recommend installing using this path..
+// ProgramData 경로 (공용 Addins 경로) : Installing in this path ensures that the software is automatically applied to all user accounts. So, I recommend installing using this path.
 
 
 Source: "DBM.addin"; DestDir: "{commonappdata}\Autodesk\Revit\Addins\2024"; Flags: ignoreversion
